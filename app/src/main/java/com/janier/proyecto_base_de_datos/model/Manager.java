@@ -2,7 +2,10 @@ package com.janier.proyecto_base_de_datos.model;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
 
 public class Manager {
 
@@ -34,7 +37,24 @@ public class Manager {
         values.put("apellido", datos.getApellido());
         values.put("correo", datos.getCorreo());
         long id = db.insert("tablaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", null, values);
-        closeBd();
         return id;
     }
+    public ArrayList<Datos> listarData(){
+        openBD();
+        ArrayList<Datos> lista = new ArrayList<>();
+
+        String sql ="SELECT * FROM tablaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        Cursor cursor = db.rawQuery(Constantes.sql, null);
+        if (cursor.moveToFirst()){
+            do {
+                Datos datos = new Datos();
+                datos.setNombre(cursor.getString(0));
+                datos.setApellido(cursor.getString(1));
+                datos.setCorreo(cursor.getString(2));
+                lista.add(datos);
+            } while (cursor.moveToNext());
+        }
+        return lista;
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.janier.proyecto_base_de_datos;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.janier.proyecto_base_de_datos.controller.Listardatos;
 import com.janier.proyecto_base_de_datos.model.ConexionBD;
 import com.janier.proyecto_base_de_datos.model.Datos;
 import com.janier.proyecto_base_de_datos.model.Manager;
@@ -52,7 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(MainActivity.this, "Error al insertar datos", Toast.LENGTH_SHORT);
                 }
+                iniciar(view);
             }
         });
+    }
+    public void iniciar (View view){
+        Intent MoverActivity = new Intent(MainActivity.this, Listardatos.class);
+        startActivity(MoverActivity);
     }
 }
